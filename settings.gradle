@@ -1,0 +1,7 @@
+include ':spi-app',
+        ':spi-plugin',
+        ':spi-api',
+        ':spi-component-1-api',
+        ':spi-component-1',
+        ':spi-component-2-api',
+        ':spi-component-2'

@@ -1,0 +1,41 @@
+apply plugin: 'groovy'
+apply plugin: 'kotlin'
+apply plugin: 'maven'
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+//    implementation 'com.android.tools.build:gradle:3.4.1'
+//    implementation 'com.android.tools.build:gradle-api:3.4.1'
+//    implementation 'commons-io:commons-io:2.6'
+//    implementation 'commons-codec:commons-codec:1.10'
+    //noinspection GradleDependency
+//    implementation 'org.ow2.asm:asm:5.1'
+    //noinspection GradleDependency
+//    implementation 'org.ow2.asm:asm-util:5.1'
+    //noinspection GradleDependency
+//    implementation 'org.ow2.asm:asm-commons:5.1'
+//    implementation 'com.quinn.hunter:hunter-transform:0.9.0'
+//    implementation "com.knight.component:component:1.0.1"
+    implementation "com.knight:transform:1.0.10"
+}
+
+repositories {
+    google()
+    maven {
+        url uri('../repo')
+    }
+    jcenter()
+    mavenCentral()
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.afirez.spi'
+            pom.artifactId = 'spi-gradle-plugin'
+            pom.version = SPI_VERSION
+            repository(url: uri('../repo'))
+        }
+    }
+}
