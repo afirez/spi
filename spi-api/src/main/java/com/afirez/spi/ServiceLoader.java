@@ -1,8 +1,13 @@
 package com.afirez.spi;
 
+import android.app.Activity;
+
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * https://github.com/afirez/spi
+ */
 public class ServiceLoader {
 
     public static ServiceLoader getInstance() {
@@ -13,12 +18,24 @@ public class ServiceLoader {
         static ServiceLoader INSTANCE = new ServiceLoader();
     }
 
+    public static Class<?> androidxFragment;
+    public static Class<?> v4Fragment;
+
+    static {
+        try {
+            androidxFragment = Class.forName("androidx.fragment.app.Fragment");
+            v4Fragment = Class.forName("android.support.v4.app.Fragment");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Map<Class<?>, Map<String, Class<?>>> serviceMap = new HashMap<>();
+
     private Map<Class<?>, Map<String, Object>> serviceInstanceMap = new HashMap<>();
 
-
     private ServiceLoader() {
-        String path = "java.lang.String";
+        String path = "https://github.com/afirez/spi";
         addService(String.class, String.class, path);
     }
 
@@ -28,6 +45,14 @@ public class ServiceLoader {
                 || serviceImplType.isInterface()
                 || !serviceType.isAssignableFrom(serviceImplType)) {
             return;
+        }
+
+        if (Activity.class.isAssignableFrom(serviceImplType)) {
+            serviceType = Activity.class;
+        } else if (androidxFragment != null && androidxFragment.isAssignableFrom(serviceImplType)) {
+            serviceType = androidxFragment;
+        } else if (v4Fragment != null && v4Fragment.isAssignableFrom(serviceImplType)) {
+            serviceType = v4Fragment;
         }
 
         Map<String, Class<?>> map = serviceMap.get(serviceType);
@@ -44,6 +69,24 @@ public class ServiceLoader {
 
     public <T> Map<String, Class<?>> serviceTypes(Class<T> serviceType) {
         return serviceMap.get(serviceType);
+
+    }
+
+    public <T> Class<T> serviceType(Class<T> serviceType) {
+        return serviceType(serviceType, serviceType.getName());
+    }
+
+    public <T> Class<T> serviceType(Class<T> serviceType, String path) {
+        if (serviceType == null || path == null) {
+            return null;
+        }
+
+        Map<String, Class<?>> serviceTypeMap = serviceMap.get(serviceType);
+        if (serviceTypeMap == null) {
+            return null;
+        }
+
+        return (Class<T>) serviceTypeMap.get(path);
 
     }
 
@@ -64,6 +107,7 @@ public class ServiceLoader {
     public <T> T service(Class<T> serviceType) {
         return service(serviceType, null);
     }
+
 
     public synchronized <T> T service(Class<T> serviceType, String path) {
         if (serviceType == null) {

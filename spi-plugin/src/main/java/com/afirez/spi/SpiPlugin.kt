@@ -8,6 +8,9 @@ import org.gradle.api.Project
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.ClassWriter
 
+/**
+ * https://github.com/afirez/spi
+ */
 class SpiPlugin : KnightPlugin<SpiExtension, SpiContext>() {
 
     private val EXTENSION_NAME = "spi"
@@ -35,7 +38,7 @@ class SpiPlugin : KnightPlugin<SpiExtension, SpiContext>() {
     }
 
     override fun getTransformName(): String {
-        return "spiTransform"
+        return "SpiTransform"
     }
 
     override fun isNeedScanClass(): Boolean {

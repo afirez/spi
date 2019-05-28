@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
-apply plugin: 'com.afirez.spi'
+apply plugin: 'spi'
 
 android {
     compileSdkVersion 28
@@ -32,7 +32,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     implementation "com.afirez.spi:spi-api:$SPI_VERSION"
-//    implementation "com.afirez.spi:spi-app-lib1:$SPI_VERSION"
 
     implementation project(':spi-component-1-api')
     implementation project(':spi-component-2-api')
@@ -40,6 +39,7 @@ dependencies {
     implementation project(':spi-component-1')
     implementation project(':spi-component-2')
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

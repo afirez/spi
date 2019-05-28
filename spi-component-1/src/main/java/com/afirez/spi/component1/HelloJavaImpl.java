@@ -5,7 +5,7 @@ import com.afirez.spi.Spi;
 import com.afirez.spi.component1.api.HelloJava;
 import com.afirez.spi.component2.api.HelloKotlin;
 
-@Spi
+@Spi(path = "/spi/provider/hello/java")
 public class HelloJavaImpl implements HelloJava {
 
      @Override
