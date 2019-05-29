@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.afirez.spi.Spi
+import com.afirez.spi.SPI
 
 
 /**
  * https://github.com/afirez/spi
  */
-@Spi(path = "/spi/androidxfragment")
+@SPI(path = "/spi/androidxfragment")
 class MainFragment : Fragment() {
 
     override fun onCreateView(

@@ -23,7 +23,7 @@ class SpiWeaveCodeClassVisitor(context: SpiContext, cv: ClassVisitor) : BaseClas
         interfaces: Array<String>?
     ) {
         super.visit(version, access, name, signature, superName, interfaces)
-        isServiceLoader = name == extension.serviceLoaderPath
+        isServiceLoader = name == extension.loaderPath
     }
 
     override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor {
@@ -58,9 +58,9 @@ class SpiWeaveCodeClassVisitor(context: SpiContext, cv: ClassVisitor) : BaseClas
                 Opcodes.LRETURN,
                 Opcodes.DRETURN,
                 Opcodes.RETURN -> {
-                    context.serviceMap.forEach { serviceTypePath, map ->
-                        map.forEach{path, serviceImplTypePath ->
-                            injectService(serviceTypePath, serviceImplTypePath, path)
+                    context.extensionsMap.forEach { type, map ->
+                        map.forEach{path, extension ->
+                            inject(type, extension, path)
                         }
                     }
                 }
@@ -68,16 +68,16 @@ class SpiWeaveCodeClassVisitor(context: SpiContext, cv: ClassVisitor) : BaseClas
             super.visitInsn(opcode)
         }
 
-        private fun injectService(serviceTypePath: String, serviceImplTypePath: String, path: String) {
-            println(" ====>  Spi addService [ $serviceTypePath --> $serviceImplTypePath ]")
+        private fun inject(type: String, extension: String, path: String) {
+            println(" ====>  Spi ${this.extension.add} [ $type --> $extension ]")
             mv.visitVarInsn(Opcodes.ALOAD, 0)
-            mv.visitLdcInsn(Type.getObjectType(serviceTypePath))
-            mv.visitLdcInsn(Type.getObjectType(serviceImplTypePath))
+            mv.visitLdcInsn(Type.getObjectType(type))
+            mv.visitLdcInsn(Type.getObjectType(extension))
             mv.visitLdcInsn(path)
             mv.visitMethodInsn(
                 Opcodes.INVOKEVIRTUAL,
-                extension.serviceLoaderPath,
-                extension.addService,
+                this.extension.loaderPath,
+                this.extension.add,
                 "(Ljava/lang/Class;Ljava/lang/Class;Ljava/lang/String;)V",
                 false
             )

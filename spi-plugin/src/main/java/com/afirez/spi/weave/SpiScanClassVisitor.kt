@@ -53,43 +53,43 @@ class SpiScanClassVisitor(context: SpiContext, classWriter: ClassWriter) :
 
         override fun visitEnd() {
             super.visitEnd()
-            println("@Spi ( $name = '$value' ) class $className:")
+            println("@SPI ( $name = '$value' ) class $className:")
 
             if (interfaces?.size == 0) {
 
-                val service = className
-                val serviceImpl = className
+                val type = className
+                val extension = className
                 val path = if (value == null) {
                     className.replace("/", ".")
                 } else {
                     "$value"
                 }
-                var map = context.serviceMap[service]
-                if (map == null) {
-                    map = HashMap()
-                    context.serviceMap[service] = map
-//                    println("    new Map:[ $service -> $map ]")
+                var extensionMap = context.extensionsMap[type]
+                if (extensionMap == null) {
+                    extensionMap = HashMap()
+                    context.extensionsMap[type] = extensionMap
+//                    println("    new Map:[ $type -> $extensionMap ]")
                 }
-                map[path] = serviceImpl
+                extensionMap[path] = extension
                 return
             }
 
             interfaces?.forEach {
-                val service = it
-                val serviceImpl = className
-                println("   Spi: [ $service -> $serviceImpl ]")
+                val type = it
+                val extension = className
+                println("   SPI: [ $type -> $extension ]")
                 val path = if (value == null) {
                     it.replace("/", ".")
                 } else {
                     "$value"
                 }
-                var map = context.serviceMap[service]
-                if (map == null) {
-                    map = HashMap()
-                    context.serviceMap[service] = map!!
+                var extensionMap = context.extensionsMap[type]
+                if (extensionMap == null) {
+                    extensionMap = HashMap()
+                    context.extensionsMap[type] = extensionMap!!
 //                    println("Spi: new Map:[ $service -> $map ]")
                 }
-                map!![path] = serviceImpl
+                extensionMap!![path] = extension
             }
 
             println(" --> end class $className")

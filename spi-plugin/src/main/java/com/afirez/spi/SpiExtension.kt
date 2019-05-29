@@ -6,7 +6,7 @@ import com.knight.transform.BaseExtension
  * https://github.com/afirez/spi
  */
 open class SpiExtension(
-    var spiPath: String = "com/afirez/spi/Spi",
-    var serviceLoaderPath: String = "com/afirez/spi/ServiceLoader",
-    var addService: String = "addService"
+    var spiPath: String = "com/afirez/spi/SPI",
+    var loaderPath: String = "com/afirez/spi/ExtensionLoader",
+    var add: String = "addExtension"
 ) : BaseExtension()

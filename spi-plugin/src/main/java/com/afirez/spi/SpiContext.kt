@@ -9,6 +9,6 @@ import org.gradle.api.Project
  */
 class SpiContext(project: Project, extension: BaseExtension) : BaseContext<BaseExtension>(project, extension) {
 
-    val serviceMap = HashMap<String, HashMap<String, String>>()
+    val extensionsMap = HashMap<String, HashMap<String, String>>()
 
 }

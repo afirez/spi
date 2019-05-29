@@ -7,6 +7,6 @@ import java.lang.annotation.RetentionPolicy;
  * https://github.com/afirez/spi
  */
 @Retention(RetentionPolicy.CLASS)
-public @interface Spi {
+public @interface SPI {
    String path() default "";
 }
