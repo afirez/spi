@@ -1,0 +1,168 @@
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka-android'
+
+//ext {
+//    projectGroupId = 'com.afirez.spi'
+//    projectPackageing = 'aar'
+//    projectName = 'spi'
+//    projectArtifactId = 'spi'
+//    projectDesc = 'SPI for componentization.'
+//
+//    siteUrl = 'https://github.com/afirez/spi'
+//    gitUrl = 'https://github.com/afirez/spi.git'
+//
+//    projectVersion = '1.0.0'
+//
+//    developerId = 'afirez'
+//    developerName = 'afirez'
+//    developerEmail = 'afirez.io@gmail.com'
+//
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//
+//    bintrayUser = 'afirez'
+//    bintrayApiKey = ''
+//    bintrayRepo = 'android'
+//    bintrayName = 'spi'
+//    bintrayLicenses = ["Apache-2.0"]
+//}
+
+version = projectVersion
+group = projectGroupId
+
+//version = ext.has("projectVersion") && !ext.projectVersion.isEmpty() ? ext.projectVersion : projectVersion
+//group =  ext.has("projectGroupId") && !ext.projectGroupId.isEmpty() ? ext.projectGroupId : projectGroupId
+
+def hasKotlin = project.hasProperty("kotlin")
+def hasAndroid = project.hasProperty("android")
+def hasJava = project.hasProperty("java")
+println("hasKotlin = $hasKotlin hasAndroid = $hasAndroid hasJava = $hasJava")
+
+if (hasKotlin) { //Kotlin libraries
+    def srcDirs = hasAndroid ? android.sourceSets.main.java.srcDirs : sourceSets.main.allSource
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from srcDirs
+    }
+    if (hasAndroid) {
+        task javadoc(type: Javadoc, dependsOn: dokka) {
+
+        }
+    }
+} else if (hasAndroid) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+//解决kotlin javadoc.options抱错
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging projectPackageing
+                groupId projectGroupId
+                artifactId projectArtifactId
+
+                // Add your description here
+                name projectName
+                description projectDesc
+                url siteUrl
+
+                // Set your license
+                licenses {
+                    license {
+                        name licenseName
+                        url licenseUrl
+                    }
+                }
+                developers {
+                    developer {
+                        id developerId
+                        name developerName
+                        email developerEmail
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+def bintrayApiKey = ext.has("bintrayApiKey") && !ext.bintrayApiKey.isEmpty() ? ext.bintrayApiKey : ""
+
+if (bintrayApiKey.isEmpty()) {
+    Properties localProperties = new Properties()
+    try {
+        def localFile = project.rootProject.file('local.properties')
+        if (localFile != null && localFile.exists()) {
+            localProperties.load(localFile.newDataInputStream())
+            bintrayApiKey = localProperties.getProperty("bintray.apikey")
+        }
+    } catch (Exception ignored) {
+        println("local.properties not found or has no 'bintray.apikey' property")
+    }
+
+}
+
+bintray {
+    user = bintrayUser
+    key = bintrayApiKey
+
+    configurations = ['archives']
+    pkg {
+        repo = bintrayRepo
+        name = bintrayName
+        desc = projectDesc
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = bintrayLicenses
+        publish = true
+        publicDownloadNumbers = true
+        version {
+            name = projectVersion
+            desc = projectDesc
+        }
+    }
+}

@@ -79,7 +79,7 @@ class SpiScanClassVisitor(context: SpiContext, classWriter: ClassWriter) :
                 val extension = className
                 println("   SPI: [ $type -> $extension ]")
                 val path = if (value == null) {
-                    it.replace("/", ".")
+                    className.replace("/", ".")
                 } else {
                     "$value"
                 }

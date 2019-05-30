@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
                 Log.w("ServiceLoader", msg)
             }
 
-            val helloKotlin = ExtensionLoader.getInstance().loadExtension(HelloKotlin::class.java)
+            val helloKotlin = ExtensionLoader.getInstance().loadExtension<HelloKotlin>("/spi/provider/hello/kotlin")
             if (helloKotlin != null) {
                 val msg = helloKotlin.helloKotlin()
                 Log.w("ServiceLoader", msg)

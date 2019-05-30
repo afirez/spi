@@ -4,16 +4,21 @@ buildscript {
     ext.kotlin_version = '1.3.31'
     repositories {
         maven {
-            url uri('./repo')
+//            url uri('./repo')
+            url "https://dl.bintray.com/afirez/android"
         }
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.afirez.spi:spi-gradle-plugin:$SPI_VERSION"
+
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.18'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -22,11 +27,12 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url uri('../repo')
+//            url uri('../repo')
+            url "https://dl.bintray.com/afirez/android"
         }
         google()
         jcenter()
-        
+
     }
 }
 

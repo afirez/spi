@@ -26,7 +26,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.afirez.spi:spi-api:$SPI_VERSION"
+    implementation "com.afirez.spi:spi:$SPI_VERSION"
 
     implementation project(':spi-component-1-api')
     implementation project(':spi-component-2-api')

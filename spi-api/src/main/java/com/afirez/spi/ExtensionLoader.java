@@ -41,19 +41,19 @@ public class ExtensionLoader {
         addExtension(String.class, String.class, path);
     }
 
-    public void addExtension(Class<?> type, Class<?> extensionImpl, String path) {
+    public void addExtension(Class<?> type, Class<?> extension, String path) {
         if (type == null
-                || extensionImpl == null
-                || extensionImpl.isInterface()
-                || !type.isAssignableFrom(extensionImpl)) {
+                || extension == null
+                || extension.isInterface()
+                || !type.isAssignableFrom(extension)) {
             return;
         }
 
-        if (Activity.class.isAssignableFrom(extensionImpl)) {
+        if (Activity.class.isAssignableFrom(extension)) {
             type = Activity.class;
-        } else if (androidxFragment != null && androidxFragment.isAssignableFrom(extensionImpl)) {
+        } else if (androidxFragment != null && androidxFragment.isAssignableFrom(extension)) {
             type = androidxFragment;
-        } else if (v4Fragment != null && v4Fragment.isAssignableFrom(extensionImpl)) {
+        } else if (v4Fragment != null && v4Fragment.isAssignableFrom(extension)) {
             type = v4Fragment;
         }
 
@@ -71,7 +71,7 @@ public class ExtensionLoader {
         if (path == null) {
             path = type.getName();
         }
-        extensionMap.put(path, extensionImpl);
+        extensionMap.put(path, extension);
 
         extensionMapByPath.put(path, type);
     }

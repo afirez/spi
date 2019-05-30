@@ -1,6 +1,6 @@
 apply plugin: 'groovy'
 apply plugin: 'kotlin'
-apply plugin: 'maven'
+
 
 dependencies {
     implementation gradleApi()
@@ -27,13 +27,43 @@ repositories {
     mavenCentral()
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.groupId = 'com.afirez.spi'
-            pom.artifactId = 'spi-gradle-plugin'
-            pom.version = SPI_VERSION
-            repository(url: uri('../repo'))
-        }
-    }
+//apply plugin: 'maven'
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            pom.groupId = 'com.afirez.spi'
+//            pom.artifactId = 'spi-gradle-plugin'
+//            pom.version = SPI_VERSION
+//            repository(url: uri('../repo'))
+//        }
+//    }
+//}
+
+ext {
+    projectGroupId = 'com.afirez.spi'
+    projectPackageing = 'jar'
+    projectName = 'spi-gradle-plugin'
+    projectArtifactId = 'spi-gradle-plugin'
+    projectDesc = 'SPI for componentization.'
+
+    siteUrl = 'https://github.com/afirez/spi'
+    gitUrl = 'https://github.com/afirez/spi.git'
+
+    projectVersion = '1.0.0'
+
+    developerId = 'afirez'
+    developerName = 'afirez'
+    developerEmail = 'afirez.io@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+    bintrayUser = 'afirez'
+    bintrayApiKey = 'b4093e8a27bbbedb9a7acab5e84716020e8cdfcf'
+    bintrayRepo = 'android'
+    bintrayName = 'spi-gradle-plugin'
+    bintrayLicenses = ["Apache-2.0"]
 }
+
+apply from: "${rootDir}/gradle/pom-evaluator.gradle"

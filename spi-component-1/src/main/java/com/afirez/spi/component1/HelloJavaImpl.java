@@ -8,9 +8,10 @@ import com.afirez.spi.component2.api.HelloKotlin;
 @SPI(path = "/spi/provider/hello/java")
 public class HelloJavaImpl implements HelloJava {
 
-     @Override
-     public String helloJava() {
-          ExtensionLoader.getInstance().loadExtension(HelloKotlin.class).helloKotlin();
-          return "helloJava";
-     }
+    @Override
+    public String helloJava() {
+        HelloKotlin helloKotlin = ExtensionLoader.getInstance().loadExtension("/spi/provider/hello/kotlin");
+        String kotlin = helloKotlin != null ? helloKotlin.helloKotlin() : "";
+        return "helloJava --> " + kotlin;
+    }
 }

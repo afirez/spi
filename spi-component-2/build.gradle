@@ -31,7 +31,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "com.afirez.spi:spi-api:$SPI_VERSION"
+    implementation "com.afirez.spi:spi:$SPI_VERSION"
 
     implementation project(':spi-component-1-api')
     implementation project(':spi-component-2-api')
