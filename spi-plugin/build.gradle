@@ -60,7 +60,7 @@ ext {
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
 
     bintrayUser = 'afirez'
-    bintrayApiKey = 'b4093e8a27bbbedb9a7acab5e84716020e8cdfcf'
+    bintrayApiKey = ''
     bintrayRepo = 'android'
     bintrayName = 'spi-gradle-plugin'
     bintrayLicenses = ["Apache-2.0"]
