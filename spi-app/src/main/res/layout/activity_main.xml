@@ -7,29 +7,46 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
-    <FrameLayout
-            app:layout_constraintBottom_toTopOf="@+id/tvHelloWorld"
+    <ScrollView
+            android:id="@+id/svList"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:id="@+id/flContainer"
-            android:layout_width="0dp"
-            android:layout_height="0dp">
+            android:layout_height="0dp"
+            android:layout_width="0dp">
 
-    </FrameLayout>
+        <LinearLayout
+                android:id="@+id/llList"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-            android:id="@+id/tvHelloWorld"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:textSize="50dp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/flContainer"/>
+            <TextView
+                    android:id="@+id/tv01AppLike"
+                    android:text="1、AppLike"
+                    style="@style/textView_button"/>
+
+            <TextView
+                    android:id="@+id/tv02Activity"
+                    android:text="2、Activity"
+                    style="@style/textView_button"/>
+
+            <TextView
+                    android:id="@+id/tv03Fragment"
+                    android:text="3、Fragment"
+                    style="@style/textView_button"/>
+
+            <TextView
+                    android:id="@+id/tv04Provider"
+                    android:text="4、Provider"
+                    style="@style/textView_button"/>
+
+            <TextView
+                    android:id="@+id/tv05RouterProvider"
+                    android:text="5、RouterProvider"
+                    style="@style/textView_button"/>
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

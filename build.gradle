@@ -3,10 +3,10 @@
 buildscript {
     ext.kotlin_version = '1.3.31'
     repositories {
-        maven {
-//            url uri('./repo')
-            url "https://dl.bintray.com/afirez/android"
-        }
+//        maven {
+////            url uri('./repo')
+//            url "https://dl.bintray.com/afirez/android"
+//        }
         google()
         jcenter()
 
@@ -26,10 +26,10 @@ buildscript {
 
 allprojects {
     repositories {
-        maven {
-//            url uri('../repo')
-            url "https://dl.bintray.com/afirez/android"
-        }
+//        maven {
+////            url uri('../repo')
+//            url "https://dl.bintray.com/afirez/android"
+//        }
         google()
         jcenter()
 

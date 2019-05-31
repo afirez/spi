@@ -1,7 +1,7 @@
-include ':spi-app',
-        ':spi-component-1-api',
-        ':spi-component-1',
-        ':spi-component-2-api',
-        ':spi-component-2',
+include ':spi-app', ':spi-applike',
+        ':spi-component1',
+        ':spi-component1-impl',
+        ':spi-component2',
+        ':spi-component2-impl',
         ':spi-api',
         ':spi-plugin'

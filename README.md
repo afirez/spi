@@ -8,7 +8,7 @@
 
 ## Todo
 
-- finish doc, finish use case
+- finish doc
 
 ## Thanks
 
