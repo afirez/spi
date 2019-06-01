@@ -1,6 +1,7 @@
 package com.afirez.spi;
 
 import android.app.Activity;
+import android.app.Fragment;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -18,8 +19,8 @@ public class ExtensionLoader {
         static ExtensionLoader INSTANCE = new ExtensionLoader();
     }
 
-    public static Class<?> androidxFragment;
-    public static Class<?> v4Fragment;
+    private static Class<?> androidxFragment;
+    private static Class<?> v4Fragment;
 
     static {
         try {
@@ -51,6 +52,8 @@ public class ExtensionLoader {
 
         if (Activity.class.isAssignableFrom(extension)) {
             type = Activity.class;
+        } else if (Fragment.class.isAssignableFrom(extension)) {
+            type = Fragment.class;
         } else if (androidxFragment != null && androidxFragment.isAssignableFrom(extension)) {
             type = androidxFragment;
         } else if (v4Fragment != null && v4Fragment.isAssignableFrom(extension)) {
@@ -132,7 +135,11 @@ public class ExtensionLoader {
     }
 
     public <T> T loadExtension(Class<T> type, String path) {
-        if (type == null) {
+        if (type == null
+                || Activity.class.isAssignableFrom(type)
+                || Fragment.class.isAssignableFrom(type)
+                || (androidxFragment != null && androidxFragment.isAssignableFrom(type))
+                || (v4Fragment != null && v4Fragment.isAssignableFrom(type))) {
             return null;
         }
 
@@ -168,7 +175,8 @@ public class ExtensionLoader {
         }
 
         synchronized (extensionsInstanceMap) {
-            if ((obj == objMap.get(path))) {
+            obj = objMap.get(path);
+            if ((obj == null)) {
                 try {
                     obj = clz.newInstance();
                     objMap.put(path, obj);

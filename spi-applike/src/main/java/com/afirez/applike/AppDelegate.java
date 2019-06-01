@@ -41,23 +41,23 @@ public class AppDelegate {
 
     public void attachBaseContext(Application app, Context base) {
         this.app = app;
-        Map<String, AppLike> callbacksMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
-        if (callbacksMap == null) {
+        Map<String, AppLike> appLikeMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
+        if (appLikeMap == null) {
             return;
         }
-        Set<Map.Entry<String, AppLike>> entries = callbacksMap.entrySet();
+        Set<Map.Entry<String, AppLike>> entries = appLikeMap.entrySet();
 
         for (Map.Entry<String, AppLike> entry : entries) {
             if (entry == null) {
                 continue;
             }
 
-            AppLike callbacks = entry.getValue();
-            if (callbacks == null) {
+            AppLike appLike = entry.getValue();
+            if (appLike == null) {
                 continue;
             }
 
-            callbacks.attachBaseContext(app, base);
+            appLike.attachBaseContext(app, base);
         }
     }
 
@@ -65,85 +65,86 @@ public class AppDelegate {
         this.app = app;
         app.registerActivityLifecycleCallbacks(activityLifecycleCallbacks);
 
-        Map<String, AppLike> callbacksMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
-        if (callbacksMap == null) {
+        Map<String, AppLike> appLikeMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
+        if (appLikeMap == null) {
             return;
         }
 
-        Set<Map.Entry<String, AppLike>> entries = callbacksMap.entrySet();
+        Set<Map.Entry<String, AppLike>> entries = appLikeMap.entrySet();
 
         for (Map.Entry<String, AppLike> entry : entries) {
             if (entry == null) {
                 continue;
             }
 
-            AppLike callbacks = entry.getValue();
-            if (callbacks == null) {
+            AppLike appLike = entry.getValue();
+            if (appLike == null) {
                 continue;
             }
 
-            callbacks.onCreate(app);
+            appLike.onCreate(app);
         }
     }
 
 
     public void onTerminate(Application app) {
-        Map<String, AppLike> callbacksMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
-        if (callbacksMap == null) {
+        Map<String, AppLike> appLikeMap = ExtensionLoader.getInstance().loadExtensions(AppLike.class);
+        if (appLikeMap == null) {
             return;
         }
-        Set<Map.Entry<String, AppLike>> entries = callbacksMap.entrySet();
+        Set<Map.Entry<String, AppLike>> entries = appLikeMap.entrySet();
 
         for (Map.Entry<String, AppLike> entry : entries) {
             if (entry == null) {
                 continue;
             }
 
-            AppLike callbacks = entry.getValue();
-            if (callbacks == null) {
+            AppLike appLike = entry.getValue();
+            if (appLike == null) {
                 continue;
             }
 
-            callbacks.onTerminate(app);
+            appLike.onTerminate(app);
         }
     }
 
 
-    private Application.ActivityLifecycleCallbacks activityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
-        @Override
-        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+    private Application.ActivityLifecycleCallbacks activityLifecycleCallbacks =
+            new Application.ActivityLifecycleCallbacks() {
+                @Override
+                public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
-        }
+                }
 
-        @Override
-        public void onActivityStarted(Activity activity) {
+                @Override
+                public void onActivityStarted(Activity activity) {
 
-        }
+                }
 
-        @Override
-        public void onActivityResumed(Activity activity) {
-            topActivity = activity;
-        }
+                @Override
+                public void onActivityResumed(Activity activity) {
+                    topActivity = activity;
+                }
 
-        @Override
-        public void onActivityPaused(Activity activity) {
-            topActivity = null;
-        }
+                @Override
+                public void onActivityPaused(Activity activity) {
+                    topActivity = null;
+                }
 
-        @Override
-        public void onActivityStopped(Activity activity) {
+                @Override
+                public void onActivityStopped(Activity activity) {
 
-        }
+                }
 
-        @Override
-        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+                @Override
+                public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
 
-        }
+                }
 
-        @Override
-        public void onActivityDestroyed(Activity activity) {
+                @Override
+                public void onActivityDestroyed(Activity activity) {
 
-        }
-    };
+                }
+            };
 
 }

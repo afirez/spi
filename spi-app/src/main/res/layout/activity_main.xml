@@ -47,6 +47,11 @@
                     android:text="5、RouterProvider"
                     style="@style/textView_button"/>
 
+            <TextView
+                    android:id="@+id/tv05More"
+                    android:text="6、More"
+                    style="@style/textView_button"/>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
