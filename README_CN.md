@@ -4,7 +4,7 @@
 
 ## 为什么会开源这个 SPI 项目 ？
 
-在项目组件化的过程中，曾通过 AndoridManifest.xml 注册的方式实现过 Application 生命周期的组件化，类似 Glide 中解析 AndoridManifest.xml 发现 GlideModule 的机制，有点繁琐。而后了解到 Google 的 AutoService，通过注解加 Java 原生 SPI，实现 Appcation 生命周期的组件化，好像刚刚好。SPI 可以没有，没有 SPI，可以用其他方案，比如说路由。首先，一般路由基本在提供路由该提供的功能，路由发现和注册机制局限在路由框架内部，不会提供 SPI，如果用路由实现，每添加一个需要 Application 生命周期的组件都需要通过在 Application 中添加代码，不是那么好维护。SPI 也可以到处都是，随着项目组件化后，发现很多地方都需要用到 SPI 机制，AutoService 加原生 SPI 机制，有一定的局限性。而 SPI 机制是遵循开闭原则的，这个事情也是在脑海里留下了不可描述的印象......于是慢慢的，才有了这个 SPI 项目。
+在项目组件化的过程中，曾通过 AndoridManifest.xml 注册的方式实现过 Application 生命周期的组件化，类似 Glide 中解析 AndoridManifest.xml 发现 GlideModule 的机制，有点繁琐。而后了解到 Google 的 AutoService，通过注解加 Java 原生 SPI，实现 Appcation 生命周期的组件化，好像刚刚好。SPI 可以没有，没有 SPI，可以用其他方案，比如说路由。首先，一般路由基本在提供路由该提供的功能，路由发现和注册机制局限在路由框架内部，不会提供 SPI，如果用路由实现，每添加一个需要 Application 生命周期的组件都需要通过在 Application 中添加代码，不是那么好维护。SPI 也可以到处都是，随着项目组件化后，发现很多地方都需要用到 SPI 机制，AutoService 加原生 SPI 机制，除了有反射还有IO，在接口非常多的时候，比较耗时。而 SPI 机制是遵循开闭原则的，这个事情也是在脑海里留下了不可描述的印象......于是慢慢的，才有了这个 SPI 项目。
 
 ## 在项目中引入 [SPI](https://github.com/afirez/spi)
 
