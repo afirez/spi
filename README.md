@@ -38,37 +38,37 @@ implementation "com.afirez.spi:spi:1.0.0"
 
 ### SPI AppLike
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/c16699dc9a57754511eb275be6113d55.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f4c0b6821?w=1252&h=946&f=png&s=193865)
 
 Make every module aware of Application lifecycle by annotated with @SPI, it will be discovered an registered to ExtensionLoader. eg:
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/b555d9f281ad5e5c7ab57e906ade61a9.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f4c026017?w=1632&h=1272&f=png&s=299116)
 
 Then, AppDelegate will load and dispatch AppLikes by ExtensionLoader.
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/9e6bdaabcc2105fad026439f38bcae69.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f51b66ed3?w=2018&h=1774&f=png&s=329836)
 
 Call AppDelegate in App and don't forget to register App to AndoridManifest.xml. Enjoy it!
   
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/3ffa66bf5abc91bf9644ebb08b5008d6.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f55447fa2?w=1374&h=1048&f=png&s=234748)
 
 ### SPI Actiivty
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/00adc899f846523757102d5df66538d3.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f51c034a6?w=2040&h=1192&f=png&s=333383)
 
-Annotate Activity with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path. (if it annotated without path, path will be it's class name.)
+Annotate Activity with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path. (if it annotated without path, path will be it's class name.)
 
 ### SPI Fragment
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/8030bb05943d521dcecb0b1915fc06f1.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f7f338ee5?w=1932&h=1666&f=png&s=400667)
 
-Annotate Fragment with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path. (if it annotated without path, path will be it's class name.)
+Annotate Fragment with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path. (if it annotated without path, path will be it's class name.)
 
 ### SPI Provider
 
-![](https://afirez.oss-cn-hangzhou.aliyuncs.com/3584f9da90a8769849d69e13c667f555.png)
+![](https://user-gold-cdn.xitu.io/2019/6/1/16b13c2f89aab5fc?w=1930&h=1012&f=png&s=246460)
 
-Annotate SpiKotlinProviderImpl with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path.(if it annotated without path, path will be it's class name.)
+Annotate SpiKotlinProviderImpl with @SPI with path so that it will be discovered and registered to ExtensionLoader, then it can be loaded by ExtensionLoader with path.(if it annotated without path, path will be it's class name.)
 
 ### Do more by SPI
 
@@ -76,7 +76,7 @@ SPI focuses on interface discovery, registration and routing table implementatio
 
 ## Thanks
 
-- [ASM](https://asm.ow2.io/): a very small and fast Java bytecode manipulation framework
+- [ASM](https://asm.ow2.io/)
 - [hunter](https://github.com/Leaking/Hunter)
 - [KnightTransform](https://github.com/kakayang2011/KnightTransform)
 
