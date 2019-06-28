@@ -32,3 +32,46 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
+
+//apply plugin: 'maven'
+//
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: uri('../repo'))
+//
+//            pom.groupId = 'com.afirez.applike'
+//            pom.artifactId = 'applike'
+//            pom.version = SPI_VERSION
+//        }
+//    }
+//}
+
+ext {
+    projectGroupId = 'com.afirez.applike'
+    projectPackageing = 'aar'
+    projectName = 'applike'
+    projectArtifactId = 'applike'
+    projectDesc = 'SPI Applike for componentization.'
+
+    siteUrl = 'https://github.com/afirez/spi'
+    gitUrl = 'https://github.com/afirez/spi.git'
+
+    projectVersion = '1.0.0'
+
+    developerId = 'afirez'
+    developerName = 'afirez'
+    developerEmail = 'afirez.io@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+
+    bintrayUser = 'afirez'
+    bintrayApiKey = ''
+    bintrayRepo = 'android'
+    bintrayName = 'applike'
+    bintrayLicenses = ["Apache-2.0"]
+}
+
+apply from: "${rootDir}/gradle/pom-evaluator.gradle"
