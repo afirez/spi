@@ -18,7 +18,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.afirez.spi:spi-gradle-plugin:1.0.0'
+    classpath 'com.afirez.spi:spi-gradle-plugin:1.0.1'
   }
 }
 
@@ -32,7 +32,7 @@ apply plugin: 'spi'
 
 ```
 
-implementation "com.afirez.spi:spi:1.0.0"
+implementation "com.afirez.spi:spi:1.0.1"
 ```
 
 ## 如何使用 SPI

@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.afirez.spi:spi-gradle-plugin:$SPI_VERSION"
+        classpath "com.afirez.spi:spi-gradle-plugin:1.0.0"
 
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
@@ -26,10 +26,10 @@ buildscript {
 
 allprojects {
     repositories {
-//        maven {
-////            url uri('../repo')
-//            url "https://dl.bintray.com/afirez/android"
-//        }
+        maven {
+//            url uri('../repo')
+            url "https://dl.bintray.com/afirez/android"
+        }
         google()
         jcenter()
 

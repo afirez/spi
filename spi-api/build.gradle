@@ -57,7 +57,7 @@ ext {
     siteUrl = 'https://github.com/afirez/spi'
     gitUrl = 'https://github.com/afirez/spi.git'
 
-    projectVersion = '1.0.0'
+    projectVersion = '1.0.1'
 
     developerId = 'afirez'
     developerName = 'afirez'
