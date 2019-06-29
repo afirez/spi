@@ -22,6 +22,10 @@ public class ExtensionLoader {
     private static Class<?> androidxFragment;
     private static Class<?> v4Fragment;
 
+    public static Class<?> fragmentType() {
+        return v4Fragment != null ? v4Fragment : androidxFragment;
+    }
+
     static {
         try {
             androidxFragment = Class.forName("androidx.fragment.app.Fragment");
