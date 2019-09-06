@@ -30,7 +30,7 @@ android {
             release {
                 keyAlias System.getenv("keyAlias")
                 keyPassword System.getenv("keyPwd")
-                storeFile rootProject.file('app-firez.jks')
+                storeFile rootProject.file('app-afirez.jks')
                 storePassword System.getenv("storePwd")
             }
         }
@@ -38,9 +38,9 @@ android {
         signingConfigs {
             release {
                 keyAlias keystoreProperties.containsKey("keyAlias") ? keystoreProperties['keyAlias'] : System.getenv("keyAlias")
-                keyPassword keystoreProperties.containsKey("keyPwd") ? keystoreProperties['keyPassword'] : System.getenv("keyPassword")
-                storeFile rootProject.file('app-firez.jks')
-                storePassword keystoreProperties.containsKey("storePwd") ? keystoreProperties['storePassword'] : System.getenv("storePassword")
+                keyPassword keystoreProperties.containsKey("keyPwd") ? keystoreProperties['keyPwd'] : System.getenv("keyPwd")
+                storeFile rootProject.file('app-afirez.jks')
+                storePassword keystoreProperties.containsKey("storePwd") ? keystoreProperties['storePwd'] : System.getenv("storePwd")
             }
         }
     }
@@ -48,7 +48,7 @@ android {
 
     buildTypes {
         release {
-            signingConfigs.release
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
