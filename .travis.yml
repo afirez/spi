@@ -1,0 +1,38 @@
+language: android
+jdk: oraclejdk8
+
+sudo: false
+
+
+android:
+  components:
+    - platform-tools
+    - tools
+    - build-tools-28.0.3
+    - android-28
+    - extra-android-m2repository
+    - extra-android-support
+
+
+before_script:
+  - chmod +x gradlew
+
+
+script:
+  - ./gradlew assembleRelease
+
+# 部署
+deploy:
+  # 部署到GitHub Release。
+  # 除此之外，Travis CI还支持发布到fir.im、AWS、Google App Engine等
+  provider: releases
+  # Github oauth token
+  api_key: ${ghToken}
+  # 部署文件路径；对于Android就部署生成的 apk 文件
+  file: "spi-app/build/outputs/apk/spi-app-release.apk"
+  # 避免 Travis CI在部署之前清空生成的APK文件
+  skip_cleanup: true
+  # 发布时机
+  on:
+    # tags设置为true表示只有在有tag的情况下才部署
+    tags: true

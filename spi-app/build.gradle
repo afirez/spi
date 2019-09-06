@@ -6,6 +6,14 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'spi'
 
+def isRunningOnTravis = System.getenv("CI") == "true"
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -16,12 +24,41 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    if (isRunningOnTravis) {
+        signingConfigs {
+            release {
+                keyAlias System.getenv("keyAlias")
+                keyPassword System.getenv("keyPwd")
+                storeFile rootProject.file('app-firez.jks')
+                storePassword System.getenv("storePwd")
+            }
+        }
+    } else {
+        signingConfigs {
+            release {
+                keyAlias keystoreProperties.containsKey("keyAlias") ? keystoreProperties['keyAlias'] : System.getenv("keyAlias")
+                keyPassword keystoreProperties.containsKey("keyPwd") ? keystoreProperties['keyPassword'] : System.getenv("keyPassword")
+                storeFile rootProject.file('app-firez.jks')
+                storePassword keystoreProperties.containsKey("storePwd") ? keystoreProperties['storePassword'] : System.getenv("storePassword")
+            }
+        }
+    }
+
+
     buildTypes {
         release {
+            signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
 }
 
 dependencies {
