@@ -15,6 +15,9 @@
 buildscript {
   repositories {
     jcenter()
+
+    // add maven repository for spi-plugin at build.gradle file of root project
+    maven { url "https://raw.githubusercontent.com/afirez/spi/master/repo/" }
   }
 
   dependencies {
@@ -29,6 +32,19 @@ apply plugin: 'spi'
 ```
 
 添加 **spi** 到需要的子模块
+
+```
+allprojects {
+  repositories {
+    ...
+
+    // add maven repository for spi at build.gradle file of root project
+    maven { url "https://raw.githubusercontent.com/afirez/spi/master/repo/" }
+
+    ...
+  }
+
+```
 
 ```
 
