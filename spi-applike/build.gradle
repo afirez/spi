@@ -43,8 +43,8 @@ uploadArchives {
 
             pom.groupId = 'com.afirez.applike'
             pom.artifactId = 'applike'
-//            pom.version = SPI_VERSION
-            pom.version = "1.0.0"
+            pom.version = SPI_VERSION
+//            pom.version = "1.0.0"
         }
     }
 }
