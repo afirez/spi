@@ -1,0 +1,60 @@
+//apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka-android'
+
+def hasKotlin = project.hasProperty("kotlin")
+def hasAndroid = project.hasProperty("android")
+def hasJava = project.hasProperty("java")
+println("hasKotlin = $hasKotlin hasAndroid = $hasAndroid hasJava = $hasJava")
+
+if (hasKotlin) { //Kotlin libraries
+    def srcDirs = hasAndroid ? android.sourceSets.main.java.srcDirs : sourceSets.main.allSource
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from srcDirs
+    }
+    if (hasAndroid) {
+        task javadoc(type: Javadoc, dependsOn: dokka) {
+
+        }
+    }
+} else if (hasAndroid) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+//解决kotlin javadoc.options抱错
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+}

@@ -27,43 +27,44 @@ repositories {
     mavenCentral()
 }
 
-//apply plugin: 'maven'
-//
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            pom.groupId = 'com.afirez.spi'
-//            pom.artifactId = 'spi-gradle-plugin'
-//            pom.version = SPI_VERSION
-//            repository(url: uri('../repo'))
-//        }
-//    }
-//}
+apply from: "${rootDir}/gradle/pkg-src.gradle"
+apply plugin: 'maven'
 
-ext {
-    projectGroupId = 'com.afirez.spi'
-    projectPackageing = 'jar'
-    projectName = 'spi-gradle-plugin'
-    projectArtifactId = 'spi-gradle-plugin'
-    projectDesc = 'SPI for componentization.'
-
-    siteUrl = 'https://github.com/afirez/spi'
-    gitUrl = 'https://github.com/afirez/spi.git'
-
-    projectVersion = '1.0.1'
-
-    developerId = 'afirez'
-    developerName = 'afirez'
-    developerEmail = 'afirez.io@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-
-    bintrayUser = 'afirez'
-    bintrayApiKey = ''
-    bintrayRepo = 'android'
-    bintrayName = 'spi-gradle-plugin'
-    bintrayLicenses = ["Apache-2.0"]
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.groupId = 'com.afirez.spi'
+            pom.artifactId = 'spi-gradle-plugin'
+            pom.version = SPI_VERSION
+            repository(url: uri('../repo'))
+        }
+    }
 }
 
-apply from: "${rootDir}/gradle/pom-evaluator.gradle"
+//ext {
+//    projectGroupId = 'com.afirez.spi'
+//    projectPackageing = 'jar'
+//    projectName = 'spi-gradle-plugin'
+//    projectArtifactId = 'spi-gradle-plugin'
+//    projectDesc = 'SPI for componentization.'
+//
+//    siteUrl = 'https://github.com/afirez/spi'
+//    gitUrl = 'https://github.com/afirez/spi.git'
+//
+//    projectVersion = '1.0.1'
+//
+//    developerId = 'afirez'
+//    developerName = 'afirez'
+//    developerEmail = 'afirez.io@gmail.com'
+//
+//    licenseName = 'The Apache Software License, Version 2.0'
+//    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//
+//    bintrayUser = 'afirez'
+//    bintrayApiKey = ''
+//    bintrayRepo = 'android'
+//    bintrayName = 'spi-gradle-plugin'
+//    bintrayLicenses = ["Apache-2.0"]
+//}
+//
+//apply from: "${rootDir}/gradle/pom-evaluator.gradle"
