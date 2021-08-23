@@ -8,14 +8,27 @@ dependencies {
     api gradleApi()
     //build tools
     api "com.android.tools.build:gradle:$BUILD_GRADLE_VERION"
-    //transform
-    api 'com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api'
+
+
+//    transform
+//    api 'com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api'
+
+
     // 开源框架，io操作
     api 'commons-io:commons-io:2.6'
 
-    api 'org.ow2.asm:asm:6.2.1'
-    api 'org.ow2.asm:asm-commons:6.2'
-    api 'org.ow2.asm:asm-util:6.0'
+    //包中定义类基于核心 API 的相关操作类
+    //包中定义了核心 API 的类，其中 ClassVisitor、FieldVisitor、MethodVisitor 和 AnnotationVisitor
+    // 四个抽象类，用于访问 .class 字节码文件中的 fields、 methods 和 annotations 相关的指令。
+    api 'org.ow2.asm:asm:7.1'
+    //包中提供了实用的类或方法的 Adapter 方法转换器；
+    api 'org.ow2.asm:asm-commons:7.1'
+    //包中提供了常见的类分析框架和分析器类；
+    api 'org.ow2.asm:asm-analysis:7.1'
+    //包中提供了基于核心 API 的常见工具类。
+    api 'org.ow2.asm:asm-util:7.1'
+    //包中定义了基于树 API 的类，以及一些用于事件和树 API 转换的工具类；
+    api 'org.ow2.asm:asm-tree:7.1'
 }
 
 apply from: "${rootDir}/gradle/pkg-src.gradle"

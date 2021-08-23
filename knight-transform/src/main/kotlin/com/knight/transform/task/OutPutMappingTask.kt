@@ -2,6 +2,7 @@ package transform.task
 
 import org.apache.commons.io.FileUtils
 import org.gradle.api.DefaultTask
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
@@ -17,8 +18,14 @@ open class OutPutMappingTask : DefaultTask() {
     @Input
     var variantName = project.objects.property(String::class.java)
 
-    @OutputFile
-    var outputMappingFile = newOutputFile()
+//    @OutputFile
+//    var outputMappingFile = newOutputFile()
+
+//    @OutputFile
+//    var outputMappingFile = getServices().get(ObjectFactory::class.java).fileProperty()
+
+    @OutputFile // property needs an annotation
+    var outputMappingFile = project.objects.fileProperty()
 
     @Internal
     var classes = project.objects.property(ArrayList::class.java)
