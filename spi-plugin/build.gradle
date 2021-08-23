@@ -35,7 +35,7 @@ uploadArchives {
         mavenDeployer {
             pom.groupId = 'com.afirez.spi'
             pom.artifactId = 'spi-gradle-plugin'
-            pom.version = SPI_VERSION
+            pom.version = SPI_PLUGIN_VERSION
             repository(url: uri('../repo'))
         }
     }

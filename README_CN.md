@@ -21,7 +21,11 @@ buildscript {
   }
 
   dependencies {
+    // gradle plugin version <= 3.6.4
     classpath 'com.afirez.spi:spi-gradle-plugin:1.0.1'
+    
+    // gradle plugin version >= 4.0.2
+    classpath 'com.afirez.spi:spi-gradle-plugin:2.0.0'
   }
 }
 
