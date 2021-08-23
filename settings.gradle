@@ -4,4 +4,5 @@ include ':spi-app', ':spi-applike',
         ':spi-component2',
         ':spi-component2-impl',
         ':spi-api',
-        ':spi-plugin'
+        ':spi-plugin',
+        ':knight-transform'

@@ -1,0 +1,42 @@
+apply plugin: 'java-library'
+apply plugin: 'kotlin'
+//apply plugin: 'com.novoda.bintray-release'//添加
+
+dependencies {
+    api localGroovy()
+    //gradle sdk
+    api gradleApi()
+    //build tools
+    api "com.android.tools.build:gradle:$BUILD_GRADLE_VERION"
+    //transform
+    api 'com.android.tools.build:transform-api:2.0.0-deprecated-use-gradle-api'
+    // 开源框架，io操作
+    api 'commons-io:commons-io:2.6'
+
+    api 'org.ow2.asm:asm:6.2.1'
+    api 'org.ow2.asm:asm-commons:6.2'
+    api 'org.ow2.asm:asm-util:6.0'
+}
+
+apply from: "${rootDir}/gradle/pkg-src.gradle"
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //GVA的参数
+            pom.groupId = 'com.knight'//组id
+            pom.artifactId = 'transform'//名称
+            pom.version = TRANSFORM_VERSION//版本号
+            repository(url: uri('../repo'))//发布的目录
+        }
+    }
+}
+
+//publish {
+//    userOrg = 'knight'//bintray.com用户名
+//    groupId = 'com.knight'//jcenter上的路径
+//    artifactId = 'transform'//项目名称
+//    publishVersion = TRANSFORM_VERSION //版本号
+//    desc = 'this is base plugin'//描述，不重要
+//}
