@@ -8,6 +8,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
 import java.lang.StringBuilder
+import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 open class OutPutMappingTask : DefaultTask() {
     init {
@@ -27,8 +28,11 @@ open class OutPutMappingTask : DefaultTask() {
     @OutputFile // property needs an annotation
     var outputMappingFile = project.objects.fileProperty()
 
+////    @Internal
+//    var classes = project.objects.property(ArrayList::class.java)
+
     @Internal
-    var classes = project.objects.property(ArrayList::class.java)
+    var classes = project.objects.listProperty(Any::class.java)
 
     @TaskAction
     fun writeMapping() {
@@ -38,7 +42,7 @@ open class OutPutMappingTask : DefaultTask() {
         FileUtils.touch(mappingFile)
         val content = StringBuilder()
         if (loggable) println("outputtask size: ${classes.get().size}")
-        (classes.get() as ArrayList<WeavedClass>).forEach {
+        (classes.get() as List<WeavedClass>).forEach {
             it?.takeIf { it ->
                 it?.hasWeavedMethod()
             }?.let {

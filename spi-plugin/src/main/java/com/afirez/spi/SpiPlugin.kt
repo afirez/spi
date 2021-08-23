@@ -29,7 +29,7 @@ class SpiPlugin : KnightPlugin<SpiExtension, SpiContext>() {
         return SpiScanClassVisitor(context, classWriter)
     }
 
-    override fun createWeaveClassVisitor(classWriter: ClassWriter): ClassVisitor? {
+    override fun createWeaveClassVisitor(classWriter: ClassWriter): ClassVisitor {
         return SpiWeaveCodeClassVisitor(context, classWriter)
     }
 
