@@ -12,7 +12,7 @@ Add **spi-gradle-plugin** to your project !
 buildscript {
    ext {
         kotlin_version = '1.5.31'
-        booster_version = '4.13.0'
+        booster_version = '4.6.0'
    }
 
   repositories {
