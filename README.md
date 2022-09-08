@@ -25,7 +25,8 @@ buildscript {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     
     // add maven repository for spi-plugin at build.gradle file of root project
-    maven { url "https://raw.githubusercontent.com/afirez/spi/master/repo/" }
+    maven { url "https://raw.githubusercontent.com/afirez/apps_android_repo/master" }
+    // maven { url "https://raw.githubusercontent.com/afirez/spi/master/repo/" }
   }
 
   dependencies {
@@ -73,7 +74,7 @@ allprojects {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 
     // add maven repository for spi at build.gradle file of root project
-    maven { url "https://raw.githubusercontent.com/afirez/spi/master/repo/" }
+    maven { url "https://raw.githubusercontent.com/afirez/apps_android_repo/master" }
 
     ...
   }
