@@ -6,3 +6,5 @@ include ':spi-app', ':spi-applike',
         ':spi-api',
         ':spi-plugin',
         ':knight-transform'
+
+include ':spi-plugin-booster'

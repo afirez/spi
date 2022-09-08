@@ -1,13 +1,13 @@
 package com.afirez.spi.app
 
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.afirez.spi.ExtensionLoader
 import com.afirez.spi.SPI
 import com.afirez.spi.component1.SpiRouter1Provider
 import com.afirez.spi.component2.SpiRouter2Provider
-import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * https://github.com/afirez/spi
@@ -18,7 +18,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        val tv01AppLike = findViewById<TextView>(R.id.tv01AppLike)
+        val tv02Activity = findViewById<TextView>(R.id.tv02Activity)
+        val tv03Fragment = findViewById<TextView>(R.id.tv03Fragment)
+        val tv04Provider = findViewById<TextView>(R.id.tv04Provider)
+        val tv05RouterProvider = findViewById<TextView>(R.id.tv05RouterProvider)
+        val tv05More = findViewById<TextView>(R.id.tv05More)
         tv01AppLike.setOnClickListener {
             /**
              * @see com.afirez.applike.AppLike
